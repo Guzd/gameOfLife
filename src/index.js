@@ -83,27 +83,27 @@ class Main extends React.Component {
 
   componentDidMount () {
     this.randomSetup();
-    this.startGame();
   }
 
   render() {
     return (
       <div>
        <h1>The game of life</h1>
-        <Menu 
-          startGame={this.startGame}
-          pause={this.pause}
-          random={this.randomSetup}
-          reset={this.reset}
-        />
-        <h2>{this.state.iterations} iterations</h2> 
-        <Grid 
-          width= {this.cols * this.cellsSize }
-          gridMatrix={this.state.gridMatrix}
-          rows={this.rows}
-          cols={this.cols}
-          handleClickCell={this.onCellSelected}
-        />
+        <div className="container"> 
+          <Menu 
+            startGame={this.startGame}
+            pause={this.pause}
+            random={this.randomSetup}
+            reset={this.reset}
+          />
+           <Grid 
+            width= {this.cols * this.cellsSize }
+            gridMatrix={this.state.gridMatrix}
+            rows={this.rows}
+            cols={this.cols}
+            handleClickCell={this.onCellSelected}
+          />
+        </div>
       </div>
     )
   }

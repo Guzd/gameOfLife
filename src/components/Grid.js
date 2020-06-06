@@ -11,7 +11,6 @@ class Grid extends React.Component {
        return <Cell
         cellClass={cellClass}
         key={id}
-        cellId={id}
         row={i}
         col={j}
         handleClickCell={this.props.handleClickCell}

@@ -11,7 +11,6 @@ body {
   border-left: solid var(--borderColor) 1px;
   border-top: solid var(--borderColor) 1px;
   display: table;
-  margin: auto;
 }
 
 .cell {
@@ -41,4 +40,16 @@ h2 {
   color: #ba2d65;
   text-align: center;
   font-family: sans-serif;
+}
+
+.menuButtons {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
