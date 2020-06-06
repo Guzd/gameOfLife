@@ -6,6 +6,7 @@ class Cell extends React.Component {
 			<div
 				className={this.props.cellClass}
 				id={this.props.cellId}
+				onClick={() => this.props.handleClickCell(this.props.row, this.props.col)}
 			/>
 		);
 	}

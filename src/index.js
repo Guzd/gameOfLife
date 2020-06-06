@@ -17,6 +17,38 @@ class Main extends React.Component {
       gridMatrix: generate2DArray(this.rows, this.cols)
     }
   }
+
+  onCellSelected = (row, column) => {
+    // console.log("clicked", row + "," + column);
+    let oldGridMatrix = this.copyMatrix(this.state.gridMatrix)
+    oldGridMatrix[row][column] = !oldGridMatrix[row][column];
+    this.setState({
+      gridMatrix: oldGridMatrix
+    })
+  }
+
+  copyMatrix = (matrix) => {
+    return matrix.map(cell=>{
+      return cell.slice();
+    });
+  }
+
+  randomSetup = (matrix) => {
+    let oldGridMatrix = this.copyMatrix(matrix)
+    oldGridMatrix.map((row, i) => {
+      return row.map((cel, j) => {
+        return oldGridMatrix[i][j] = (Math.floor(Math.random() * 101) % 5 === 0);
+      })
+    })
+    this.setState({
+      gridMatrix: oldGridMatrix
+    })
+  }
+
+  componentDidMount () {
+    this.randomSetup(this.state.gridMatrix)
+  }
+
   render() {
     return (
       <div>
@@ -26,6 +58,7 @@ class Main extends React.Component {
         gridMatrix={this.state.gridMatrix}
         rows={this.rows}
         cols={this.cols}
+        handleClickCell={this.onCellSelected}
        />
       </div>
     )

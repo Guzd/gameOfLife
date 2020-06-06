@@ -14,6 +14,7 @@ class Grid extends React.Component {
         cellId={id}
         row={i}
         col={j}
+        handleClickCell={this.props.handleClickCell}
       />;
     })
     )
