@@ -38,6 +38,7 @@ class Main extends React.Component {
     this.setState({
       gridMatrix: updateGrid
     })
+    this.startGame()
   }
 
   startGame = () => {
@@ -89,14 +90,17 @@ class Main extends React.Component {
     return (
       <div>
        <h1>The game of life</h1>
-        <div className="container"> 
-          <Menu 
-            startGame={this.startGame}
-            pause={this.pause}
-            random={this.randomSetup}
-            reset={this.reset}
-          />
-           <Grid 
+        <div className="container">    
+          <div className="menu">    
+           <h3>{this.state.iterations}</h3>       
+            <Menu 
+              startGame={this.startGame}
+              pause={this.pause}
+              random={this.randomSetup}
+              reset={this.reset}
+            />
+          </div>
+          <Grid 
             width= {this.cols * this.cellsSize }
             gridMatrix={this.state.gridMatrix}
             rows={this.rows}

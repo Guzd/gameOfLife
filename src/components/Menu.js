@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
   square: {
 		borderRadius: '0px',
-		margin: '0 15px 15px 0',
+		marginBottom: '15px',
 		color: '#ba2d65',
 		'&:hover': {
 			background: "#ba2d65",
@@ -24,7 +24,7 @@ class Menu extends React.Component {
 	render() {
 		const { classes } = this.props
 		return (
-			<div className="menuButtons">
+			<div className="buttons">
 				<Tooltip title="Play">
 					<Fab className={classes.square} onClick={this.props.startGame}>
 						<PlayArrowIcon /> 
