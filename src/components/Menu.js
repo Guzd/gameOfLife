@@ -5,35 +5,50 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import ShuffleIcon from '@material-ui/icons/Shuffle';
 import CloseIcon from '@material-ui/icons/Close';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+  square: {
+		borderRadius: '0px',
+		margin: '0 15px 15px 0',
+		color: '#ba2d65',
+		'&:hover': {
+			background: "#ba2d65",
+			color: '#fafafa'
+    }
+  }
+};
+
 
 class Menu extends React.Component {
 	render() {
+		const { classes } = this.props
 		return (
 			<div className="menuButtons">
 				<Tooltip title="Play">
-					<Fab onClick={this.props.startGame}>
+					<Fab className={classes.square} onClick={this.props.startGame}>
 						<PlayArrowIcon /> 
 					</Fab>
       	</Tooltip>
 				<Tooltip title="Pause">
-					<Fab onClick={this.props.pause}>
+					<Fab className={classes.square} onClick={this.props.pause}>
 						<PauseIcon />
 					</Fab>
       	</Tooltip>
 				<Tooltip title="Random start">
-					<Fab onClick={this.props.random}>
+					<Fab className={classes.square} onClick={this.props.random}>
 						<ShuffleIcon />
 					</Fab>
       	</Tooltip>
 				<Tooltip title="Clean">
-					<Fab onClick={this.props.reset}>
+					<Fab className={classes.square} onClick={this.props.reset}>
 						<CloseIcon />
 					</Fab>
       	</Tooltip>
 			</div>
-			)
+		)
 	}
 }
 
 
-export default Menu;
+export default withStyles(styles)(Menu);
