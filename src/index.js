@@ -14,45 +14,68 @@ class Main extends React.Component {
     this.cols = 20;
     this.cellsSize = 25;
     this.state = {
-      gridMatrix: generate2DArray(this.rows, this.cols)
+      gridMatrix: generate2DArray(this.rows, this.cols),
+      iterations: 0
     }
   }
 
   onCellSelected = (row, column) => {
-    // console.log("clicked", row + "," + column);
-    let oldGridMatrix = this.copyMatrix(this.state.gridMatrix)
-    oldGridMatrix[row][column] = !oldGridMatrix[row][column];
+    let oldGrid = this.state.gridMatrix.map(row => row.slice());
+    oldGrid[row][column] = !oldGrid[row][column];
     this.setState({
-      gridMatrix: oldGridMatrix
+      gridMatrix: oldGrid
     })
   }
 
-  copyMatrix = (matrix) => {
-    return matrix.map(cell=>{
-      return cell.slice();
-    });
-  }
-
-  randomSetup = (matrix) => {
-    let oldGridMatrix = this.copyMatrix(matrix)
-    oldGridMatrix.map((row, i) => {
+  randomSetup = (grid) => {
+    let updateGrid = grid.map((row, i) => {
       return row.map((cel, j) => {
-        return oldGridMatrix[i][j] = (Math.floor(Math.random() * 101) % 5 === 0);
+        return grid[i][j] = (Math.floor(Math.random() * 101) % 5 === 0);
       })
     })
     this.setState({
-      gridMatrix: oldGridMatrix
+      gridMatrix: updateGrid
+    })
+  }
+
+  startGame = () => {
+		clearInterval(this.intervalId);
+		this.intervalId = setInterval(this.gameIteration, 200);
+	}
+
+  gameIteration = () => {
+    let grid = this.state.gridMatrix;
+    const alive = (row, column) => grid[row] && grid[row][column];
+    let newGrid =  grid.map((row, i) => {
+      return row.map((cell, j) => {
+        let neighbours = 0;
+        if (alive(i - 1, j - 1)) neighbours++;
+        if (alive(i - 1, j)) neighbours++;
+        if (alive(i - 1, j + 1)) neighbours++;
+        if (alive(i, j - 1)) neighbours++;
+        if (alive(i, j + 1)) neighbours++;
+        if (alive(i + 1, j - 1))   neighbours++;
+        if (alive(i + 1, j)) neighbours++;
+        if (alive(i + 1, j + 1)) neighbours++;
+        return (alive(i, j) ? neighbours > 1 && neighbours < 4 : neighbours === 3) ? true : false;
+      })
+    })
+    this.setState({
+      gridMatrix: newGrid,
+      iterations: this.state.iterations + 1 
     })
   }
 
   componentDidMount () {
-    this.randomSetup(this.state.gridMatrix)
+    this.randomSetup(this.state.gridMatrix);
+    this.startGame();
   }
 
   render() {
     return (
       <div>
        <h1>The game of life</h1>
+       <h2>{this.state.iterations} iterations</h2> 
        <Grid 
         width= {this.cols * this.cellsSize }
         gridMatrix={this.state.gridMatrix}
