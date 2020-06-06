@@ -28,10 +28,11 @@ class Main extends React.Component {
     })
   }
 
-  randomSetup = (grid) => {
-    let updateGrid = grid.map((row, i) => {
-      return row.map((cel, j) => {
-        return grid[i][j] = (Math.floor(Math.random() * 101) % 5 === 0);
+  randomSetup = () => {
+    let oldGrid = this.state.gridMatrix.map(row => row.slice());
+    let updateGrid = oldGrid.map((row) => {
+      return row.map(() => {
+        return (Math.floor(Math.random() * 101) % 5 === 0);
       })
     })
     this.setState({
@@ -81,7 +82,7 @@ class Main extends React.Component {
   }
 
   componentDidMount () {
-    this.randomSetup(this.state.gridMatrix);
+    this.randomSetup();
     this.startGame();
   }
 
