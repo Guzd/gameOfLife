@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Grid from "./components/Grid"; 
+import Menu from "./components/Menu"; 
 import "./index.css";
 
 function generate2DArray(rows, columns) {
@@ -39,9 +40,22 @@ class Main extends React.Component {
   }
 
   startGame = () => {
-		clearInterval(this.intervalId);
-		this.intervalId = setInterval(this.gameIteration, 200);
-	}
+		clearInterval(this.interval);
+		this.interval = setInterval(this.gameIteration, 200);
+  }
+  
+  pause = () => {
+    clearInterval(this.interval);
+  }
+
+  reset = () =>  {
+    clearInterval(this.interval);
+    let clearGrid = generate2DArray(this.rows, this.cols);
+    this.setState({
+			gridMatrix: clearGrid,
+			iterations: 0
+		});
+  }
 
   gameIteration = () => {
     let grid = this.state.gridMatrix;
@@ -75,14 +89,20 @@ class Main extends React.Component {
     return (
       <div>
        <h1>The game of life</h1>
-       <h2>{this.state.iterations} iterations</h2> 
-       <Grid 
-        width= {this.cols * this.cellsSize }
-        gridMatrix={this.state.gridMatrix}
-        rows={this.rows}
-        cols={this.cols}
-        handleClickCell={this.onCellSelected}
-       />
+        <Menu 
+          startGame={this.startGame}
+          pause={this.pause}
+          random={this.randomSetup}
+          reset={this.reset}
+        />
+        <h2>{this.state.iterations} iterations</h2> 
+        <Grid 
+          width= {this.cols * this.cellsSize }
+          gridMatrix={this.state.gridMatrix}
+          rows={this.rows}
+          cols={this.cols}
+          handleClickCell={this.onCellSelected}
+        />
       </div>
     )
   }
