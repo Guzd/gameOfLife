@@ -36,7 +36,8 @@ body {
   background: #ff94c2;
 }
 
-h1 {
+h1,
+h2 {
   color: #ba2d65;
   text-align: center;
   font-family: sans-serif;
