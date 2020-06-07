@@ -26,7 +26,7 @@ class Menu extends React.Component {
 		return (
 			<div className="buttons">
 				<Tooltip title="Play">
-					<Fab className={classes.square} onClick={this.props.startGame}>
+					<Fab className={classes.square} onClick={this.props.play}>
 						<PlayArrowIcon /> 
 					</Fab>
       	</Tooltip>
