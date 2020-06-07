@@ -41,8 +41,7 @@ class Main extends React.Component {
   }
 
   play = () => {
-    if (!this.isEmpty(this.state.gridMatrix)) {
-      console.log(this.isEmpty(this.state.gridMatrix))
+    if (!this.isGridEmpty(this.state.gridMatrix)) {
       clearInterval(this.interval);
       this.interval = setInterval(this.gameIteration, 200);
     }
@@ -67,14 +66,14 @@ class Main extends React.Component {
     let newGrid =  grid.map((row, i) => {
       return row.map((cell, j) => {
         let neighbours = 0;
-        if (alive(i - 1, j - 1)) neighbours++;
-        if (alive(i - 1, j)) neighbours++;
-        if (alive(i - 1, j + 1)) neighbours++;
-        if (alive(i, j - 1)) neighbours++;
-        if (alive(i, j + 1)) neighbours++;
-        if (alive(i + 1, j - 1))   neighbours++;
-        if (alive(i + 1, j)) neighbours++;
-        if (alive(i + 1, j + 1)) neighbours++;
+        neighbours += this.aliveCounter(alive(i - 1, j - 1));
+        neighbours += this.aliveCounter(alive(i - 1, j));
+        neighbours += this.aliveCounter(alive(i - 1, j + 1));
+        neighbours += this.aliveCounter(alive(i, j - 1));
+        neighbours += this.aliveCounter(alive(i, j + 1));
+        neighbours += this.aliveCounter(alive(i + 1, j - 1));
+        neighbours += this.aliveCounter(alive(i + 1, j));
+        neighbours += this.aliveCounter(alive(i + 1, j + 1));
         return (alive(i, j) ? neighbours > 1 && neighbours < 4 : neighbours === 3) ? true : false;
       })
     })
@@ -84,28 +83,44 @@ class Main extends React.Component {
     })
   }
 
+  aliveCounter = (input) => {
+    const count = {
+      true: 1,
+      false: 0,
+      undefined: 0,
+    };
+    return count[input];
+  };
+
+
+
+  input
   componentDidMount () {
     this.randomSetup();
   }
 
-  isEmpty = (grid) => {
-  return grid.every((row) => this.cellEmpty(row) === true )
+  isGridEmpty = (grid) => {
+  return grid.every((row) => row.every(item => item === false) === true)
   }
 
-  cellEmpty = (row) => {
-    return row.every( item => item === false);
+  isGridRepeated = (grid, oldGrid) => {
+    return grid.every((row, i) => row.every( (item, j)=> item === oldGrid[i][j]) === true)
   }
 
   render() {
     return (
       <div>
-       <h1>The game of life</h1>
+        <div className= "title">
+          <h1>Game of life</h1>
+          <h2>By Diana Gutiérrez</h2> 
+        </div> 
         <div className="container">    
           <div className="menu">    
-           <h3>{this.state.iterations}</h3>       
+            <h3>{this.state.iterations}</h3>       
             <Menu 
               play={this.play}
               pause={this.pause}
+              step={this.gameIteration}
               random={this.randomSetup}
               reset={this.reset}
             />
