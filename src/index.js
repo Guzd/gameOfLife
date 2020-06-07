@@ -38,10 +38,15 @@ class Main extends React.Component {
     this.setState({
       gridMatrix: updateGrid
     })
-    this.startGame()
+  }
+
+  random = () => {
+    this.randomSetup();
+    this.startGame();
   }
 
   startGame = () => {
+    
 		clearInterval(this.interval);
 		this.interval = setInterval(this.gameIteration, 200);
   }
@@ -55,7 +60,7 @@ class Main extends React.Component {
     let clearGrid = generate2DArray(this.rows, this.cols);
     this.setState({
 			gridMatrix: clearGrid,
-			iterations: 0
+      iterations: 0
 		});
   }
 
@@ -86,6 +91,15 @@ class Main extends React.Component {
     this.randomSetup();
   }
 
+  checkIfEmpty = () => {
+    var isEmpty = 0;
+    this.state.gridMatrix.forEach(row => row.forEach(item => {
+      if(item !== false) isEmpty++ 
+    }
+    ))
+    return isEmpty === 0
+  }
+
   render() {
     return (
       <div>
@@ -96,7 +110,7 @@ class Main extends React.Component {
             <Menu 
               startGame={this.startGame}
               pause={this.pause}
-              random={this.randomSetup}
+              random={this.random}
               reset={this.reset}
             />
           </div>
