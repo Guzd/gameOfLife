@@ -40,11 +40,6 @@ class Main extends React.Component {
     })
   }
 
-  random = () => {
-    this.randomSetup();
-    this.play();
-  }
-
   play = () => {
     if (!this.isEmpty(this.state.gridMatrix)) {
       console.log(this.isEmpty(this.state.gridMatrix))
@@ -111,7 +106,7 @@ class Main extends React.Component {
             <Menu 
               play={this.play}
               pause={this.pause}
-              random={this.random}
+              random={this.randomSetup}
               reset={this.reset}
             />
           </div>
