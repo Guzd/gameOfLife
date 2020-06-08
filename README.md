@@ -25,7 +25,7 @@ Additionally, the user can toggle the state of any of the cells by clicking on t
 
 ## Installation
 
-###Prerequisites
+### Prerequisites
 
 Install Node.js
 
