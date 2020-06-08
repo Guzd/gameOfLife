@@ -4,6 +4,8 @@ This Conway's Game of life is implemented with React. The code contains no loops
 
 ## Demo
 
+live demo: https://guzd.github.io/gameOfLife/
+
 ![Game pattern demo ](public/demo/demo-pattern.gif)
 
 AVAILABLE FEATURES
