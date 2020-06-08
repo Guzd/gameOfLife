@@ -36,7 +36,8 @@ class Main extends React.Component {
       })
     })
     this.setState({
-      gridMatrix: updateGrid
+      gridMatrix: updateGrid,
+      iterations: 0
     })
   }
 
