@@ -41,12 +41,16 @@ class Main extends React.Component {
   }
 
   play = () => {
-    if (!this.isGridEmpty(this.state.gridMatrix)) {
-      clearInterval(this.interval);
-      this.interval = setInterval(this.gameIteration, 200);
+    const playIfEmpty = {
+      false: () => {
+          clearInterval(this.interval);
+          this.interval = setInterval(this.iteration, 200);
+      },
+      true: () => {}
     }
+    playIfEmpty[this.isGridEmpty(this.state.gridMatrix)]()
   }
-  
+
   pause = () => {
     clearInterval(this.interval);
   }
@@ -60,7 +64,7 @@ class Main extends React.Component {
 		});
   }
 
-  gameIteration = () => {
+  iteration = () => {
     let grid = this.state.gridMatrix;
     const alive = (row, column) => grid[row] && grid[row][column];
     let newGrid =  grid.map((row, i) => {
@@ -92,19 +96,12 @@ class Main extends React.Component {
     return count[input];
   };
 
-
-
-  input
-  componentDidMount () {
-    this.randomSetup();
-  }
-
   isGridEmpty = (grid) => {
   return grid.every((row) => row.every(item => item === false) === true)
   }
 
-  isGridRepeated = (grid, oldGrid) => {
-    return grid.every((row, i) => row.every( (item, j)=> item === oldGrid[i][j]) === true)
+  componentDidMount () {
+    this.randomSetup();
   }
 
   render() {
@@ -120,7 +117,7 @@ class Main extends React.Component {
             <Menu 
               play={this.play}
               pause={this.pause}
-              step={this.gameIteration}
+              step={this.iteration}
               random={this.randomSetup}
               reset={this.reset}
             />
