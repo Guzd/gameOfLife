@@ -29,7 +29,7 @@ Additionally, the user can toggle the state of any of the cells by clicking on t
 
 ### Prerequisites
 
-Install Node.js
+Install [Node.js](nodejs.org/en/download/)
 
 ### Step 1
 
@@ -60,4 +60,4 @@ yarn start
 Then you can go to http://localhost:3000 in your browser.
 Enjoy!
 
-**_Important note:_** this app is not optimized for mobile yet.
+**_Important note:_** this app is not optimized for mobile display yet.
