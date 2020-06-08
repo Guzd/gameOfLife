@@ -29,7 +29,7 @@ Additionally, the user can toggle the state of any of the cells by clicking on t
 
 ### Prerequisites
 
-Install [Node.js](nodejs.org/en/download/)
+Install [Node.js](https://nodejs.org/es/download/)
 
 ### Step 1
 
