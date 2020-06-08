@@ -12,8 +12,8 @@ class Main extends React.Component {
   constructor(){
     super();
     this.rows = 20;
-    this.cols = 20;
-    this.cellsSize = 25;
+    this.cols = 50;
+    this.cellsSize = 20;
     this.state = {
       gridMatrix: generate2DArray(this.rows, this.cols),
       iterations: 0
@@ -78,7 +78,7 @@ class Main extends React.Component {
         neighbours += this.aliveCounter(alive(i + 1, j - 1));
         neighbours += this.aliveCounter(alive(i + 1, j));
         neighbours += this.aliveCounter(alive(i + 1, j + 1));
-        return (alive(i, j) ? neighbours > 1 && neighbours < 4 : neighbours === 3) ? true : false;
+        return neighbours === 3  || (neighbours === 2 && alive(i, j));
       })
     })
     this.setState({
@@ -97,7 +97,7 @@ class Main extends React.Component {
   };
 
   isGridEmpty = (grid) => {
-  return grid.every((row) => row.every(item => item === false) === true)
+    return grid.every((row) => row.every(item => item === false) === true);
   }
 
   componentDidMount () {
@@ -108,12 +108,11 @@ class Main extends React.Component {
     return (
       <div>
         <div className= "title">
-          <h1>Game of life</h1>
-          <h2>By Diana Gutiérrez</h2> 
+          <h1>Conway's Game of life</h1>
+          <h2>Diana Gutiérrez</h2>
         </div> 
         <div className="container">    
-          <div className="menu">    
-            <h3>{this.state.iterations}</h3>       
+          <div className="menu">       
             <Menu 
               play={this.play}
               pause={this.pause}
@@ -121,6 +120,9 @@ class Main extends React.Component {
               random={this.randomSetup}
               reset={this.reset}
             />
+            <div>
+              <h3>{this.state.iterations}</h3>    
+            </div> 
           </div>
           <Grid 
             width= {this.cols * this.cellsSize }
