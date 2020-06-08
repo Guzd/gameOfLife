@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
   square: {
 		borderRadius: '0px',
-		marginBottom: '15px',
+		marginRight: '15px',
 		color: '#ba2d65',
 		'&:hover': {
 			background: "#ba2d65",
