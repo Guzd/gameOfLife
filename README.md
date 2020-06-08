@@ -19,9 +19,11 @@ This implementation of the Game of Life uses a 20x50 grid and includes the follo
 
 These features are illustrated in the following GIF.
 
+![Game functions](public/demo/demo-functions.gif)
+
 Additionally, the user can toggle the state of any of the cells by clicking on them. Using this feature, the user can draw and test any pattern.
 
-![Game functions](public/demo/demo-functions.gif)
+![Game functions](public/demo/demo-patterns.gif)
 
 ## Installation
 
